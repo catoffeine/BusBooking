@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    {% include 'logo_title.html' %}
+    <div class="container_auth">
+        <h1 class="sign_in_title">Авторизация</h1>
+
+        <div class="signing_choice_title"><h2>Для водителей</h2></div>
+
+        <div class="signing_outer signing_outer_partners">
+            <a class="sign_in" href="/auth/driver/login">ВХОД</a>
+            <a class="sign_up" href="/auth/driver/registration">РЕГИСТРАЦИЯ</a>
+        </div>
+
+        <h2 class="signing_choice_title">Для компаний</h2>
+
+        <div class="signing_outer signing_outer_partners">
+            <a class="sign_in" href="/auth/company/login">ВХОД</a>
+            <a class="sign_up" href="/auth/company/registration">РЕГИСТРАЦИЯ</a>
+        </div>
+        <a class="back_btn" href="/">НАЗАД</a>
+
+    </div>
+</div>
+
+{% endblock %}

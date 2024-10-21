@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% include 'header.html' %}
+
+<div class="ticket_container">
+    <div class="qr_code_container">
+
+        <img src="/{{ticket.get_qr}}">
+        <div class="info_container">
+            <div class="title">Пассажир</div>
+            <p class="info">{{ticket.owner}}</p>
+        </div>
+
+        <div class="info_container">
+            <div class="title">Маршрут</div>
+            <div class="info">{{ticket.trip.route.stops}}</div>
+        </div>
+
+        <div class="info_container">
+            <div class="title">Место</div>
+            <div class="info">{{ticket.seat}}</div>
+        </div>
+
+        <div class="info_container">
+            <div class="title">Стоимость покупки</div>
+            <div class="info">{{ticket.bought_price}} руб.</div>
+        </div>
+<!-- 
+        <p>: </p>
+        <p>Маршрут: {{ticket.trip.route.stops}}</p>
+        <p>Место: {{ticket.seat}}</p>
+        <p>Стоимость покупки: {{ticket.bought_price}} рублей</p> -->
+        <a class="refund_ticket" href="/return-ticket/{{ticket.ticket_code}}">Сдать билет</a>
+        
+        <p class="refund_info">С полными правилами оформления возврата одноразовых билетов можно
+            ознакомиться <a class="inner_link" href="/return-policy">по ссылке</a></p>
+        
+    </div>
+
+    <a class="back_btn" href="/my-tickets">Назад</a>
+
+    <p class="issued_info">Разовый именной билет выдан ИП Полунчуков ДС, ИНН 711601857728</p>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Подходящие билеты</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Дата</th>
+        <th scope="col">Автобус</th>
+        <th scope="col">Водитель</th>
+        <th scope="col">Маршрут</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for trip in trips %}
+    <tr>
+        <th scope="row">{{trip.id}}</th>
+        <td>{{trip.start_dt}}</td>
+        <td>{{trip.bus.license_plate}}</td>
+        <td>{{trip.driver}}</td>
+        <td>{{trip.route.stops}}</td>
+        <td><a href="/view-trip/{{trip.id}}">Выбрать место</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<br>
+<br>
+<br>
+<a href="/">Назад</a>
+
+
+{% endblock %}

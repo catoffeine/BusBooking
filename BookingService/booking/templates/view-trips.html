@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'header.html' %}
+
+<div class="view_trips_container">
+    <h2 class="title">Найденные рейсы </h2>
+    <p class="date_info">от <span>{{date}}</span></p>
+    <p class="points_info">из <span class="span_from">{{from_f}}</span> в <span class="span_to">{{to_f}}</span></p>
+    {% for trip in trips %}
+        <div class="trip_card">
+            <div class="trip_card_inner_container">
+                
+                <div class="id_price_container">
+                    <div class="id_container">
+                        <div class="title">
+                            Номер маршрута
+                        </div>
+                        <div class="id">
+                            {{trip.route.name}}
+                        </div>
+                    </div>
+                    <div class="price_container">
+                        <div class="title">Цена билета</div>
+                        <div class="price">{{ trip.ticket_price }} <span>руб.</span></div>
+                    </div>
+                </div>
+
+                <div class="time_place_container">
+                    <div class="time_container">
+                        <!-- <div class="title">время отправления</div> -->
+                        <div class="time">{{trip.start_dt|date:"H:i"}}</div>
+                    </div>
+
+                    <a href="/view-trip/{{trip.id}}" target="_blank" class="choose_place">Выбрать место</a>
+                </div>
+
+                <!-- <div class="start_dt">
+                    {{trip.start_dt|date:"H:i"}}
+                </div> -->
+            </div>
+        </div>
+
+    {% endfor %}
+    <a class="back_btn" href="/">Назад</a>
+</div>
+
+{% endblock %}

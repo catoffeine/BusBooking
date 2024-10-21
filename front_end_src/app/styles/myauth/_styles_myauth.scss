@@ -1,0 +1,555 @@
+.container {
+    .logo {
+        margin-top: 0;
+    }
+}
+
+.container_auth {
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+
+    .logo {
+        margin-top: 20px;
+        // margin-bottom: 40px;
+    }
+    // .logo img {
+        
+    //     background-repeat: no-repeat;
+    //     width: 50px;
+    //     height: 50px;
+    // }
+
+    .for_partners {
+        margin-top: 20px;
+        a {
+            color: $accent_color;
+            text-decoration: underline;
+        }
+        
+    }
+
+    .for_admin {
+        a {
+            font-size: 15px;
+            opacity: 0.5;
+            color: $textcolor;
+        }
+    }
+
+    .sign_in_title, .sign_up_title {
+        font-size: 17px;
+        margin-bottom: 15px;
+    }
+
+
+    .sign_in_form, .sign_up_form {
+        margin-top: 5px;
+        &_flexcontainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            input[type="text"], input[type="password"] {
+                transition-duration: 0.05s;
+                transition-property: border-left;
+                transition-timing-function: ease-out;
+                width: 250px;
+                height: 50px;
+                margin-top: 10px;
+                padding: 10px 5px;
+                border: 0px solid $accent_color;
+                position: relative;
+                box-shadow: -2px -2px 2px 0px rgba(0, 0, 0, 0.06), 2px 2px 2px 0px rgba(0, 0, 0, 0.10);
+                &:focus {
+                    background-clip: padding-box;
+                    border-left: 2px solid $accent_color; 
+                }
+            }
+        }
+
+        
+
+        .sumbit_active {
+            background-color: $accent_color;
+            color: $textinvertcolor;
+            border: none;
+            box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.10);
+        }
+
+
+        button {
+            color: $textcolor;
+            background-color: transparent;
+            margin-top: 20px;
+            width: 250px;
+            height: 50px;
+            border-radius: 10px;
+            border: 1px solid $textcolor;
+            transition: 0.2s all ease-in-out;
+            cursor: pointer;
+            
+            // &:focus {
+            //     background-color: $accent_color;
+            //     color: $textinvertcolor;
+            //     border: none;
+            //     box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.10);
+            // }
+        }
+
+
+        .form_button_active {
+            background-color: $accent_color;
+            color: $textinvertcolor;
+            border: none;
+        }
+        
+        
+        span {
+            margin-top: 5px;
+            color: $errortext_color;
+        }
+    }
+
+    .checkbox_flexcontainer:first-of-type {
+        margin-top: 20px;
+    }
+
+    .sign_up_form .checkbox_flexcontainer {
+        .form-check-input {
+            width: 14px;
+            height: 14px;
+            margin-right: 10px;
+        }
+
+
+        .form-check-label a {
+            color: $accent_color;
+            text-decoration: underline;
+        }
+        width: 100%;
+        display: flex;
+        // justify-items: center;
+        justify-content: center;
+        align-items: baseline;
+    }
+
+    .account_info_question {
+        margin-top: 20px;
+        font-size: 12px;
+        color: $textcolor;
+    }
+
+    .account_info_question a {
+        color: $accent_color;
+        text-decoration: underline;
+    }
+
+    .signing_choice_title {
+        margin-top: 20px;
+        padding: 10px;
+        border-bottom: 2px solid $accent_color;
+        box-shadow: 0px -2px 2px 0px rgba(0, 0, 0, 0.10);
+        color: $textcolor;
+    }
+
+    
+
+    .personcode_form { 
+
+        .flexcontainer {
+            display: flex;
+            flex-direction: column;
+            width: 250px;
+            align-items: center;
+            .hidden_input {
+                position: absolute;
+                opacity: 0;
+                left: -10000%;
+            }
+        }
+
+        .code_input input {
+            margin-top: 15px;
+            color: $textcolor;
+            width: 100px;
+            height: 50px;
+            background: transparent;
+            text-align: center;
+            border: 2px solid $accent_color;
+            font-size: 24px;
+            border-radius: 15px;
+            letter-spacing: 4px;
+            transition: 0.4s width ease-in-out;
+            &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+                margin: 0;
+                -webkit-appearance: none;
+            }
+            &:focus {
+                width: 150px;
+            }
+        }
+
+        .error_msg {
+            margin-top: 10px;
+            color: $errortext_color;
+        }
+
+        
+
+        button {
+            margin-top: 20px;
+            width: 200px;
+            height: 50px;
+            border-radius: 10px;
+            border: 1px solid $textcolor;
+            transition: 0.2s all ease-in-out;
+            font-size: 15px;
+
+            cursor: pointer;
+            
+            &:focus {
+                background-color: $accent_color;
+                color: $textinvertcolor;
+                border: none;
+                box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.10);
+            }
+        }
+
+    }
+
+    .personcode_phone {
+        font-size: 20px;
+        color: $accent_color;
+        // text-decoration: underline;
+    }
+
+}
+
+.back_btn {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100px;
+    text-align: center;
+    height: 40px;
+    border-left: 1px solid $accent_color;
+    line-height: 40px;
+    box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.10);
+    color: $textcolor;
+}
+
+.setpassword_container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 350px;
+    // border: 1px solid $accent_color;
+    margin-top: 15px;
+    padding-bottom: 15px;
+    // padding-left: 15px;
+    border-radius: 10px;
+    // background-color: white;
+    // box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.10);
+    .item {
+        text-align: left;
+        color: $errortext_color;
+        padding: 10px 10px;
+        border: 1px solid $passwordreq_color;
+        background-color: white;
+        border-radius: 5px;
+        margin-top: 15px;
+        width: 350px;
+        transition-property: color border;
+        transition-duration: 0.2s;
+        transition-timing-function: ease-in-out;
+    }
+
+    .satisfied {
+        color: $correct_textcolor;
+        border: 1px solid $correct_textcolor;
+    }
+}
+
+.set_password_registration .flexcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    input {
+        width: 300px;
+        height: 50px;
+        border-radius: 10px;
+        font-size: 15px;
+        padding-left: 10px;
+        border: 2px solid $accent_color;
+    }
+
+    button {
+        margin-top: 20px;
+        width: 200px;
+        height: 50px;
+        border-radius: 15px;
+        line-height: 50px;
+        // background-color: white;
+        border: 2px solid $accent_color;
+        cursor: pointer;
+        color: $textcolor;
+        transition: all ease-in-out 0.2s;
+    }
+
+    .form_button_active {
+        background-color: $accent_color;
+        color: $textinvertcolor;
+        border: none;
+    }
+
+    
+}
+
+
+
+.signing_outer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include responsive(phone_400) {
+        flex-direction: column;
+        margin-right: 0;
+    }
+
+    a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        width: 190px;
+        border-radius: 5px;
+        font-size: 20px;
+    }
+
+    .sign_in {
+        background-color: $accent_color;
+        color: $textinvertcolor;
+        margin-right: 5px;
+
+        @include responsive(phone_400) {
+            margin-right: 0;
+        }
+    }
+
+    .sign_up {
+        border: 2px solid $textcolor;
+        color: $textcolor;
+        margin-left: 5px;
+        @include responsive(phone_400) {
+            margin-left: 0;
+            margin-top: 10px;
+        }
+    }
+
+    &_partners {
+        margin-top: 20px;
+    }
+}
+
+
+.resources_links_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .pic {
+        width: 50px;
+        height: 50px;
+        border-right: 1px solid $accent_color;
+        display: flex;
+        align-items: center;
+        img {
+            width: 35px;
+            height: 35px;
+            opacity: 0.85;
+            filter: invert(34%) sepia(13%) saturate(0%) hue-rotate(253deg) brightness(91%) contrast(91%);
+        }
+    }
+
+    .item {
+        color: $textcolor;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        align-content: center;
+        
+        .extended {
+            width: 150px;
+        }
+
+        p {
+            width: 100px;
+        }
+
+        font-size: 20px;
+        line-height: 80px;
+        padding: 0 10px;
+        height: 80px;
+        width: 220px;
+        border-radius: 5px;
+        box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.10), -1px -1px 2px 0px rgba(0, 0, 0, 0.10);
+        margin-top: 10px;
+    }
+}
+
+.container_docx {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    // margin-top: 100px;
+
+    .loaded_docx_info {
+        white-space: nowrap;
+        margin-top: 20px;
+        color: $textcolor;
+        font-size: 20px;
+    }
+
+    .docx_list {
+        width: 100%;
+        height: auto;
+        list-style-type: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-content: center;
+        &_item {
+            border-left: 1px solid $accent_color;
+            padding: 10px;
+            text-align: center;
+            font-size: 16px;
+            line-height: 24px;
+            min-width: 150px;
+            width: 285px;
+            height: auto;
+            white-space: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-top: 10px;
+            border-radius: 5px;
+            // border: 1px solid $textcolor;
+            color: $textcolor;
+            box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.10)
+            
+        }
+    }
+
+    .load_docx_info {
+        text-align: center;
+        margin-right: 10px;
+        margin-left: 10px;
+        max-width: 450px;
+        margin-top: 20px;
+        font-size: 18px;
+        color: $textcolor;
+    }
+    
+    .docx_important {
+        margin-right: 10px;
+        margin-left: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 15px;
+        line-height: 17px;
+        max-width: 400px;
+        height: auto;
+        padding: 5px 5px;
+        color: $textinvertcolor;
+        background: #ff472783;
+        border: 2px dashed $errortext_color;
+        border-radius: 10px;
+        // box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.10);
+    }
+
+    .form_container {
+        display: flex;
+        justify-content: center;
+        justify-items: center;
+        align-content: center;
+        align-items: center;
+
+        width: 285px;
+        height: 100px;
+        border-style: dashed;
+        border-width: 2px;
+        border-color: $textcolor;
+        border-radius: 15px;
+        position: relative;
+        input {
+            position: absolute;
+            border: none;
+            opacity: 0;
+            width: 95%;
+            height: 95%;
+        }
+        .file_container {
+            display: flex;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+            justify-items: center;
+            
+            img {
+                width: 50px;
+                height: 50px;
+                margin-right: 20px;
+            }
+            p {
+                line-height: 50px;
+                height: 50px;
+                color: $textcolor;
+                width: 140px;
+            }
+            .file_name {
+                display: none;
+                width: 90%;
+                color: $textcolor;
+            }
+            &_active {
+                img, p {
+                    display: none;
+                }
+                .file_name {
+                    width: 300px;
+                    height: 100%;
+                    overflow: hidden;
+                    display: inline-block;
+                    text-align: center;
+                }
+            }
+        }
+        
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    form button {
+        margin-top: 15px;
+        width: 200px;
+        height: 50px;
+        border: 2px solid $accent_color;
+        background: transparent;
+        color: $accent_color;
+
+        font-size: 18px;
+    }
+}
+
+.check_documents_title {
+    white-space: nowrap;
+    color: $textcolor;
+    font-size: 20px;
+    margin-top: 100px;
+}

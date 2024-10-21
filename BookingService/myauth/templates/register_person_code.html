@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <img id="background_image">
+    <div class="container_auth">
+        {% include 'logo_title.html' %}
+
+        <p>Введите код ({{code}}), отправленный на</p>
+        <p class="personcode_phone">{{phone}}</p>
+        <form class="personcode_form" method="post" autocomplete="off">
+            {% csrf_token %}
+            <div class="flexcontainer">
+                <div class="code_input">
+                    {{ form.code }}
+                    <!-- <div class="item"><input type="text" type="number"></div>
+                    <div class="item"><input type="text" type="number"></div>
+                    <div class="item"><input type="text" type="number"></div>
+                    <div class="item"><input type="text" type="number"></div> -->
+                </div>
+                <!-- <div class="hidden_input">{{ form.code }}</div> -->
+                <span class="error_msg">{{form.code.errors}}</span>
+                <!-- <button type="submit">зерегистрироваться</button> -->
+
+            </div>
+            
+    </form>
+</div>
+<script type="text/javascript">
+    const REQUIRED_CODE_LENGTH = 4;
+    // let code_input_container = document.querySelector('.personcode_form .flexcontainer .code_input');
+    // let code_input_items = code_input_container.querySelectorAll('.item input');
+    // let code_input_register_btn = document.querySelector('.personcode_form .flexcontainer button');
+    // let hidden_code_input = document.querySelector('.personcode_form .hidden_input input');
+    
+    
+    window.onload = () => {
+        document.addEventListener("wheel", function(event){
+            if(document.activeElement.type === "number") {
+                document.activeElement.blur();
+            }
+        });
+
+        let person_code_form = document.querySelector('.personcode_form');
+        let code_input = document.querySelector('.personcode_form .code_input input');
+        code_input.addEventListener('input', (e) => {
+            let target = e.target;
+            if (target.value.length == REQUIRED_CODE_LENGTH) person_code_form.submit();
+            else if (target.value.length > REQUIRED_CODE_LENGTH) target.value = target.value.substring(0, target.value.length - 1);
+        });
+
+        code_input.focus();
+    }
+
+    // const check_code_input = (target) => {
+    //     let flag = false;
+    //     let value_code = '';
+    //     for (let i = 0; i < code_input_items.length; ++i) {
+    //         value_code += code_input_items[i].value;
+    //         if (code_input_items[i].value == '' && code_input_items[i] !== target) {
+    //             code_input_items[i].focus();
+    //             flag = true;
+    //             break;
+    //         }
+    //     }
+    //     if (!flag) {
+    //         hidden_code_input.value = value_code;
+    //         console.log(hidden_code_input.value);
+    //         code_input_register_btn.focus();
+    //     }
+    // }
+
+    // code_input_items.forEach((element) => {
+    //     element.addEventListener('input', (e) => {
+    //         console.log('onchange');
+    //         let target = e.target;
+    //         console.log(isNaN(target.value))
+    //         if (isNaN(target.value)) target.value = '';
+    //         else if (target.value.length > 1) target.value = target.value.substring(0, target.value.length - 1);
+            
+    //         else {
+    //             setTimeout(() => {
+    //                 check_code_input(target);  
+    //             }, 0);
+    //         }
+
+    //     })
+    // })
+
+</script>
+
+</div>
+
+
+{% endblock %}

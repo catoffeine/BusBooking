@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"/> -->
+
+
+<div class="chooseseat_container_popover">
+    {% for row in scheme %}
+        {% with row_i=forloop.counter %}
+            {% for seat in scheme|get:row|get:"data" %}
+                {% if 'space' not in seat %}
+                    <div id="popover{{ row_i }}_{{ forloop.counter }}" class="popover_window">
+                        <div class="popover_window_container">
+
+                            <button class="close_btn popover_toggle" data-popover-content="popover{{ row_i }}_{{ forloop.counter }}"><img
+                                src="{% static 'images/buses/close.svg' %}"></button>
+
+                            <div class="popover_heading">Ряд {{ scheme|get:row_i|get:"row_n" }}, место {{ seat|get:"seat_n" }}</div>
+
+                            <a class="buy_seat_btn popover_toggle" data-popover-content="popover_row_{{ row }}"
+                            href="/buy-ticket/{{tid}}/{{scheme|get:row_i|get:'row_n'}}-{{ seat|get:'seat_n'}}">Купить</a>
+
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endwith %}
+    {% endfor %}
+</div>
+
+{% include 'header.html' %}
+
+<div class="blurred_container">
+    <div class="choose_seat_container">
+        <h1 class="title">Выберите место</h1>
+        <div class="column">
+            {% for row in scheme %}
+            <div class="row">
+                <!-- <button class="btn btn-primary" tabindex="0">
+                    Ряд {{scheme|get:row|get:"row_n" }}
+                </button> -->
+
+
+                {% with row_i=forloop.counter %}
+                {% for seat in scheme|get:row|get:"data" %}
+
+                {% if 'space' not in seat %}
+
+                
+                <div class="place_container space_object">
+                    {% load static %}
+
+                    {% if 'booked' not in seat %}
+                        <img class="seat_img" src="{% static 'images/buses/armchair.svg' %}">
+                        <button class="the_seat popover_toggle" tabindex="0"
+                            data-popover-content="popover{{ row_i }}_{{ forloop.counter }}">
+                            {{seat|get:"seat_n"}}
+                        
+                        </button>
+                    {% else %}
+                        <img class="seat_img_booked" src="{% static 'images/buses/armchair.svg' %}">
+                        <button class="the_seat" style="pointer-events: none;">{{seat|get:"seat_n"}}</button>
+                    {% endif %}
+                </div>
+
+                <!-- <button class="btn btn-primary" tabindex="0" data-toggle="popover"
+                        data-popover-content="#popover{{ row_i }}_{{ forloop.counter }}">
+                    {{seat|get:"seat_n"}}
+                </button> -->
+                <!-- <div id="popover{{ row_i }}_{{ forloop.counter }}" class="hidden">
+                    <div class="popover-heading">Ряд {{ scheme|get:row_i|get:"row_n" }}, место {{ seat|get:"seat_n" }}</div>
+                    <div class="popover-body">
+                        <a class="btn btn-primary mx-auto"
+                        href="/buy-ticket/{{tid}}/{{scheme|get:row_i|get:'row_n'}}-{{ seat|get:'seat_n'}}">Купить</a>
+                    </div>
+                </div> -->
+                {% else %}
+                    
+
+                <div class="gap space_object" tabindex="0"></div>
+                {% endif %}
+
+
+                {% endfor %}
+
+                {% endwith %}
+
+            </div>
+            {% endfor %}
+
+
+        </div>
+
+        <div class="chair_info_outer">
+
+            <div class="chair_info_container">
+
+                <div class="place_container">
+                    <img class="seat_img" src="{% static 'images/buses/armchair.svg' %}">
+                    <button class="the_seat popover_toggle" tabindex="0"
+                        data-popover-content="popover{{ row_i }}_{{ forloop.counter }}">
+                    
+                    </button>
+                </div>
+
+                <p class="chair_info"> - Свободно</p>
+
+            </div>
+
+            <div class="chair_info_container">
+
+                <div class="place_container">
+                    <img class="seat_img_booked" src="{% static 'images/buses/armchair.svg' %}">
+                    <button class="the_seat" style="pointer-events: none;"></button>
+                </div>
+
+                <p class="chair_info"> - Зарезервировано</p>
+
+            </div>
+
+        </div>
+
+        <a href="/view-trip/{{tid}}" class="back_btn">Назад</a>
+        
+    </div>
+</div>
+
+<script>
+
+if (!document.querySelector('.choose_seat_container .row')) {
+    document.querySelector('.choose_seat_container .column').style.display = 'none';
+}
+
+window.onload = () => {
+    document.querySelectorAll('.popover_toggle').forEach((element) => {
+        element.addEventListener('click', (e) => {
+            console.log('clicked');
+            let target = e.target;
+            let popover_window_id = target.getAttribute("data-popover-content");
+
+            let popover_window = document.getElementById(`${popover_window_id}`);
+            popover_window.classList.toggle('popover_window_active');
+
+            if (popover_window.classList.contains('popover_window_active')) {
+                let input = popover_window.querySelector('input[type="text"]');
+                if (input) {
+                    input.focus();
+                    setTimeout(function(){ input.selectionStart = input.selectionEnd = 10000; }, 0); // support for more browsers 
+                }
+            }
+            document.querySelector('.blurred_container').classList.toggle('blurred_container_active');
+        })
+    });
+
+}
+
+// $(function() {
+//   $("[data-toggle=popover]").popover({
+//     html: true,
+//     placement:"right",
+//     content: function() {
+//       var content = $(this).attr("data-popover-content");
+//       return $(content).children(".popover-body").html();
+//     },
+//     title: function() {
+//       var title = $(this).attr("data-popover-content");
+//       return $(title).children(".popover-heading").html();
+//     }
+//   });
+// });
+</script>
+<br>
+<br>
+
+
+{% endblock %}

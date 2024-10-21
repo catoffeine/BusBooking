@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+{% include 'header.html' %}
+<div class="trips_container">
+    <h2 class="title">Рейсы</h2>
+    <a href="add-trip" class="add_trip">Добавить рейс</a>
+
+    <ul class="list_trips">
+        {% for trip in trips %}
+
+    
+        <li class="list_trips_item">
+
+            <div class="departure_time">{{trip.start_dt}}</div>
+
+            <div class="id_bus_flexcontainer">
+
+                <div class="id_container">
+                    <div class="id_title">
+                        ID Маршрута
+                    </div>
+                    <div class="id">
+                        <span class="id_1">#</span><span class="id_2">{{trip.id}}</span>
+                    </div>
+                </div>
+    
+                <div class="bus_container">
+                    <div class="bus_title">
+                        Автобус
+                    </div>
+                    <div class="bus">
+                        {{trip.bus.license_plate}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="dirver_edit_flexcontainer">
+                <div class="driver_container">
+                    <div class="driver_title">
+                        Водитель
+                    </div>
+    
+                    <div class="driver">
+                        {{trip.driver}}
+                    </div>
+                </div>
+    
+                <div class="edit_remove_container">
+                    <a href="/edit-trip/{{trip.id}}" class="edit"><img src="{% static 'images/trips/edit.svg' %}"></a>
+                    <a href="/delete-trip/{{trip.id}}" class="remove"><img src="{% static 'images/trips/close.svg' %}"></a>
+                </div>
+
+            </div>
+            
+            <div class="check_tickets_container">
+                <a href="/check-tickets/{{trip.id}}" class="check_tickets">проверить билеты</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+
+    
+
+    <a class="back_btn" href="/">Назад</a>
+</div>
+
+<!-- <table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Дата</th>
+        <th scope="col">Автобус</th>
+        <th scope="col">Водитель</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for trip in trips %}
+    <tr>
+        <th scope="row">{{trip.id}}</th>
+        <td>{{trip.start_dt}}</td>
+        <td>{{trip.bus.license_plate}} {{trip.bus.brand}}</td>
+        <td>{{trip.driver}}</td>
+        <td><a href="/check-tickets/{{trip.id}}">Проверить билеты</a></td>
+        <td><a href="/edit-trip/{{trip.id}}">Редактировать</a></td>
+        <td><a href="/delete-trip/{{trip.id}}">Удалить</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<br>
+
+<br>
+<br> -->
+<!-- <a href="/">Назад</a> -->
+
+
+{% endblock %}

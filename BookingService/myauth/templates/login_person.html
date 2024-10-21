@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+{% load static %}
+
+<div class="container">
+    {% include 'logo_title.html' %}
+    <img id="background_image">
+    <div class="container_auth">
+
+        <h1 class="sign_in_title">Вход {{header_text}}</h1>
+        <form class="sign_in_form" method="post">
+            {% csrf_token %}
+            <div class="sign_in_form_flexcontainer">
+                {{ form.phone }}
+                {{ form.password }}
+                <span>{{form.email.errors}}</span>
+                <span>{{form.password.errors}}</span>
+            </div>
+
+            
+            <button type="submit" disabled>ВОЙТИ</button>
+        </form>
+        <div class="account_info_question">Нет аккаунта? <a class="registration_button" href="/auth/{{role}}/registration"> Регистрация {{header_text}}</a></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="{% static 'js/phone_validation.js' %}">
+    
+</script>
+{% endblock %}

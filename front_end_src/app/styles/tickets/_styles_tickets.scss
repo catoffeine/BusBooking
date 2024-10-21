@@ -1,0 +1,464 @@
+.search_tickets_form {
+    .flex_container {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        .form_item_container {
+            margin-top: 10px;
+            width: auto;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            fieldset {
+                border: none;
+            }
+            .input_info {
+                text-align: left;
+                width: 100%;
+                font-size: 15px;
+                color: $input_info_color;
+            }
+            input[type="date"] {
+                border: 1px solid #D4D4D4;
+                background: none;
+                color: $textcolor;
+                font-size: 17px;
+                border-radius: 8px;
+                // padding: 0 10px;
+                padding-left: 10px;
+                padding-right: 10px;
+                height: 50px;
+                width: 190px;
+                transition: border-left 0.04s ease-in-out;
+                font-family: $userfont;
+                &:focus {
+                    border-left: 2px solid $accent_color;
+                }
+            }
+            input[type="text"] {
+                border: 1px solid #D4D4D4;
+                color: $textcolor;
+                font-size: 17px;
+                border-radius: 8px;
+                width: 190px;
+                height: 50px;
+                padding-left: 10px;
+                padding-right: 10px;
+                transition: border-left border-right 0.04s ease-in-out;
+                &:focus {
+                    border-left: 2px solid $accent_color;
+                    border-right: 2px solid $accent_color;
+                }
+                
+            }
+            datalist {
+                position: absolute;
+                background-color: white;
+                // border: 1px solid $accent_color;
+                border-left: 2px solid $accent_color;
+                border-right: 2px solid $accent_color;
+                box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.10), -2px 0px 2px 0px rgba(0, 0, 0, 0.10);
+                border-radius: 0 0 10px 10px;
+                border-top: none;
+                width: 190px;
+                padding: 5px;
+                // top: -20px;
+                max-height: 150px;
+                overflow-y: auto;
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+
+            option {
+                background-color: white;
+                border-bottom: 1px solid #BEBEBE;
+                white-space:normal;
+                height: auto;
+                padding: 5px 4px;
+                color: $textcolor;
+                margin-bottom: 1px;
+                font-size: 15px;
+                transition: all ease-in-out 0.1s;
+                cursor: pointer;
+                &:last-child {
+                    border: none;
+                }
+                &:hover {
+                    background-color: $accent_color;
+                    color: $textinvertcolor;
+                    border-radius: 10px;
+                }
+            }
+
+            .active {
+                background-color: #D4D4D4;
+            }
+        }
+    }
+
+    button {
+        margin-top: 15px;
+        width: 150px;
+        height: 40px;
+        border: none;
+        background-color: $accent_color;
+        color: $textinvertcolor;
+        border-radius: 15px;
+        cursor: pointer;
+        box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.274);
+
+    }
+}
+
+.mytickets_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    flex-basis: 100%;
+    margin-top: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+
+    .title {
+        font-size: 20px;
+        color: $textcolor;
+        text-align: center;
+    }
+
+    .ticket_card {
+        margin-top: 15px;
+        margin-left: 10px;
+        margin-right: 10px;
+        display: flex;
+        
+        flex-direction: column;
+        // width: 270px;
+        background-color: white;
+        box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.356);
+
+        // .time_place_container {
+        //     margin-top: 15px;
+        //     display: flex;
+        //     justify-content: space-between;
+        //     align-items: center;
+
+        //     .time_container {
+        //         display: flex;
+        //         flex-direction: column;
+        //         align-items: flex-start;
+        //         width: 150px;
+        //         .title {
+        //             text-align: left;
+        //         }
+                
+        //         .time {
+        //             font-size: 27px;
+
+        //             font-family: reosans;
+        //             text-decoration: underline;
+        //             // color: #1854CC;
+        //             color: $accent_color;
+        //             margin-top: 4px;
+        //             // box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.1), -1px -1px 4px 0px rgba(0, 0, 0, 0.082);
+        //         }
+        //     }
+
+        // }
+
+        .id_place_container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            
+
+            .id, .place {
+                color: $accent_color;
+                font-family: reosans;
+                
+            }
+
+            .place {
+                margin-top: 5px;
+                font-size: 40px;
+                line-height: 40px;
+                font-weight: bold;
+            }
+
+            .id_container {
+                display: flex;
+                flex-direction: column;
+                .id_0 {
+                    color: $input_info_color;
+                    font-size: 45px;
+                }
+                .id {
+                    font-size: 50px;
+                }
+            }
+
+            .place_container {
+
+                .title {
+                    font-size: 20px;
+                    color: $input_info_color;
+                }
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        .code_container {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            .title {
+                color: $input_info_color;
+                font-size: 20px;
+            }
+
+            .code {
+                margin-top: 5px;
+                font-size: 17px;
+                line-height: 20px;
+                text-decoration: underline;
+                font-style: italic;
+                color: $accent_color;
+            }
+        }
+
+        .trip_container {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            .title {
+                color: $input_info_color;
+                font-size: 20px;
+            }
+
+            .trip {
+                margin-top: 5px;
+                font-size: 18px;
+                line-height: 18px;
+                font-weight: bold;
+                color: $accent_color;
+            }
+        }
+
+        .check_ticket {
+            padding: 5px 20px;
+            color: $textinvertcolor;
+            background-color: $accent_color;
+            border-radius: 5px;
+        }
+
+        .check_ticket_container {
+            margin-top: 15px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            justify-items: center;
+
+        }
+
+        &_inner_container {
+            padding: 20px 15px;
+        }
+    }
+    .title {
+        color: $input_info_color;
+        font-size: 30px;
+        line-height: 30px;
+    }
+}
+
+
+.ticket_container {
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+
+    .ticket_title {
+        margin-top: 20px;
+        font-size: 20px;
+        color: $textcolor;
+    }
+
+    .issued_info {
+        width: 80%;
+        font-size: 17px;
+        line-height: 17px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+        color: $input_info_color;
+    }
+}
+
+.qr_code_container {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+
+    img {
+        width: 300px;
+
+    }
+
+    width: 600px;
+
+    @include responsive(pc_700) {
+        width: 80%;
+    }
+
+    
+    box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.1), -1px -1px 4px 0px rgba(0, 0, 0, 0.082);
+    padding: 10px;
+
+    .info_container {
+        margin-top: 15px;
+        width: 270px;
+        display: flex;
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        white-space: normal;
+ 
+        // word-wrap: break-word;
+
+        .title {
+            color: $input_info_color;
+            font-size: 18px;
+            line-height: 18px;
+        }
+
+        .info {
+            width: 95%;
+            white-space: normal;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            margin-top: 4px;
+            color: $textcolor;
+            font-size: 20px;
+            line-height: 20px;
+        }
+
+        
+    }
+
+    .refund_ticket {
+        margin-top: 10px;
+        padding: 5px 20px;
+        color: $textinvertcolor;
+        background-color: $accent_color;
+        border-radius: 5px;
+    }
+
+    .refund_info {
+        width: 90%;
+        font-size: 17px;
+        line-height: 17px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+        color: $input_info_color;
+
+        .inner_link {
+            color: $accent_color;
+
+        }
+    }
+
+}
+
+.check_tickets_container {
+    width: 100%;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+    // margin-left: 15px;
+    // margin-right: 15px;
+
+    .video_preview {
+        display: flex;
+        justify-content: center;
+    }
+
+    .video_preview video {
+        margin: 15px auto;
+        width: 95%;
+        height: auto;
+    }
+
+    .camera_buttons_container {
+        display: flex;
+        width: 95%;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+    }
+
+
+    .onclick_animation img {
+        animation-name: reverse_camera_click;
+        animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        animation-duration: 0.65s;
+        animation-iteration-count: infinite;
+    }
+
+    .onclick_animation {
+        animation-name: reverse_camera_click;
+        animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        animation-duration: 0.65s;
+        animation-iteration-count: infinite;
+    }
+
+
+    .change_camera_view {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: $accent_color;
+        position: relative;
+        z-index: 999;
+        // filter: invert(99%) sepia(0%) saturate(3344%) hue-rotate(268deg) brightness(114%) contrast(100%);
+        border: none;
+        outline: none;
+        
+        img {
+            width: 35px;
+            height: 35px;
+        }
+    }
+}
+
+.check_tickets_inner_container {
+    padding: 10px;
+    box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.1), -1px -1px 4px 0px rgba(0, 0, 0, 0.082);
+    border-radius: 5px;
+}
+
+
+@keyframes reverse_camera_click {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

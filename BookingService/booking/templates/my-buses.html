@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'header.html' %}
+
+<div class="buses_container">
+    
+    <h2 class="buses_container_title">Автобусы</h2>
+    <a href="add-bus" class="add_bus">Добавить автобус</a>
+    <!-- <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Номер</th>
+            <th scope="col">Марка</th>
+            <th scope="col">Цвет</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody> -->
+        {% for bus in buses %}
+        
+            <ul class="list_buses">
+                <li class="list_buses_item">
+                    
+                    <div class="id_container">
+                        <div class="brand">{{bus.brand}}</div>
+                        <div class="id">
+                            <span class="id_0">ID</span><span class="id_1">#</span><span class="id_2">{{bus.id}}</span>
+                        </div>
+                    </div>
+
+                    <div class="license">
+                        <div><span class="license_span">Номер: </span> {{bus.license_plate}}</div>
+                        <a href="/edit-bus/{{bus.id}}" class="edit">изменить</a>
+                    </div>
+                    <div class="color_block">
+                        <div class="color_block_sub">Цвет: <div class="color">{{bus.color}}</div></div>
+                        <a href="/delete-bus/{{bus.id}}" class="remove">удалить</a>
+                    </div>
+                </li>
+            </ul>
+
+        <!-- <tr>
+            <th scope="row">{{bus.id}}</th>
+            <td>{{bus.license_plate}}</td>
+            <td>{{bus.brand}}</td>
+            <td>{{bus.color}}</td>
+            <td><a href="/edit-bus/{{bus.id}}">Редактировать</a></td>
+            <td><a href="/delete-bus/{{bus.id}}">Удалить</a></td>
+        </tr> -->
+        {% endfor %}
+        <!-- </tbody>
+    </table> -->
+   
+    <a class="back_btn" href="/">Назад</a>
+</div>
+
+
+{% endblock %}

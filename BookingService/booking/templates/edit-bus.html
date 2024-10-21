@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<img id="background_image">
+{% include 'header.html' %}
+<div class="buses_container">
+    <h2>{{label}}</h2>
+    
+    <form class="search_tickets_form" method="post" autocomplete="off">
+        {% csrf_token %}
+        
+        <div class="flex_container">
+
+            <div class="form_item_container">
+                <p class="input_info">Номера</p>
+                {{ form.license_plate }}
+                <!-- <input type="text" name="license_plate" class="form-control" placeholder="license_plate" required="" id="id_license_plate"> -->
+            </div>
+
+            <div class="form_item_container datalist-control">
+                <fieldset>
+                    <p class="input_info">Модель</p>
+                    {{ form.brand }}
+                    
+                    <datalist id="brand" role="listbox">
+                        <option value="Mercedes">Mercedes</option>
+                        <option value="Mercedes">ЗИЛ</option>
+                        <option value="Mercedes">ГАЗ</option>
+                        <option value="Mercedes">ПАЗ</option>
+                        <option value="Mercedes">УАЗ</option>
+                        <option value="Mercedes">ЛиАЗ</option>
+                        <option value="BMW">Икар</option>
+                    </datalist>
+                </fieldset>
+                {{ form.from_f.errors }}
+                <!-- <input type="text" name="brand" class="form-control" placeholder="brand" id="id_brand"> -->
+            </div>
+
+            <div class="form_item_container datalist-control">
+                <fieldset>
+                    <p class="input_info">Цвет</p>
+                    {{ form.color }}
+                    
+                    <datalist id="color" role="listbox">
+                        <option value="Белый">Белый</option>
+                        <option value="Черный">Черный</option>
+                        <option value="Черный">Серый</option>
+                        <option value="Черный">Синий</option>
+                        <option value="Черный">Красный</option>
+                        <option value="Черный">Жёлтый</option>
+                        <option value="Черный">Зелёный</option>
+                    </datalist>
+                </fieldset>
+                    <!-- <input type="color" name="color" class="form-control colorpicker" placeholder="color" id="id_color"> -->
+                    <!-- <div class="color_circle"></div> -->
+                
+            </div>
+        </div>
+            
+        <button type="sumbit">Сохранить</button>
+    </form>
+    
+    <a class="change_layout" href="/buses/edit-scheme/{{bid}}">Поменять рассадку</a>
+    <a class="back_btn" href="/my-buses">Назад</a>
+</div>
+
+{% load static %}
+
+<script src="{% static 'js/dropdown_search.js' %}"></script>
+
+<!-- <script>
+    window.onload = () => {
+        document.querySelector('.color_label .colorpicker').addEventListener('input', (e) => {
+            let target = e.target;
+            document.querySelector('.color_label .color_circle').style.backgroundColor = target.value;
+        })
+    }
+</script> -->
+
+{% endblock %}

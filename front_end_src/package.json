@@ -1,0 +1,30 @@
+{
+  "name": "front_end_src",
+  "version": "1.0.0",
+  "description": "source files for front-end",
+  "main": "index.js",
+  "type": "module",
+  "browserslist": [
+    "last 10 versions"
+  ],
+  "scripts": {
+    "build": "gulp build",
+    "clean": "gulp clean",
+    "watch": "gulp start_watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.15",
+    "cssnano": "^6.0.1",
+    "del": "^7.1.0",
+    "gulp": "^4.0.2",
+    "gulp-changed": "^4.0.3",
+    "gulp-concat": "^2.6.1",
+    "gulp-imagemin": "^8.0.0",
+    "gulp-postcss": "^9.0.1",
+    "gulp-sass": "^5.1.0",
+    "gulp-sass-glob": "^1.1.0",
+    "sass": "^1.66.1"
+  }
+}

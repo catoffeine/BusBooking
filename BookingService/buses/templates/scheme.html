@@ -1,0 +1,320 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"/> -->
+<!-- 
+<style>
+    .seattext {
+      font-size: 20px;
+      fill: white;
+    }
+</style> -->
+<div class="seat_container_popover">
+    {% for row in scheme %}
+
+    <div id="popover_row_{{ row }}" class="popover_window popover_window_rowedit">
+        <div class="popover_window_container">
+            <button class="close_btn popover_toggle" data-popover-content="popover_row_{{ row }}"><img
+                    src="{% static 'images/buses/close.svg' %}"></button>
+
+
+            <div class="popover_body">
+                <form action="/buses/set-row-n/{{busid}}/{{row}}" method="POST">
+                    {% csrf_token %}
+                    <div class="input_container">
+                        <div class="popover-heading">Ряд</div>
+                        <input type="text" name="row-name" class="row_name" id="row_name_{{ row }}"
+                               placeholder="ряд" value='{{ scheme|get:row|get:"row_n" }}'>
+                    </div>
+                    <div class="save_remove_container">
+                        <button class="save_btn popover_toggle" data-popover-content="popover_row_{{ row }}"
+                                type="submit"><img src="{% static 'images/buses/save.svg' %}"></button>
+                        <a class="remove_btn popover_toggle" data-popover-content="popover_row_{{ row }}"
+                           href="/buses/delete-row/{{busid}}/{{ row }}"><img
+                                src="{% static 'images/buses/remove.svg' %}"></a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    {% with row_i=forloop.counter %}
+    {% for seat in scheme|get:row|get:"data" %}
+
+    <!-- Добавление кресел между другими креслами -->
+    <div id="popover2_{{ row_i }}_{{ forloop.counter }}" class="popover_window popover_window_add_place">
+        <div class="popover_window_container">
+            <button class="close_btn popover_toggle" data-popover-content="popover2_{{ row_i }}_{{ forloop.counter }}">
+                <img src="{% static 'images/buses/close.svg' %}"></button>
+            <div class="popover-heading">Добавление места</div>
+
+            <div class="add_place_container">
+                <a class="popover_toggle" data-popover-content="popover2_{{ row_i }}_{{ forloop.counter }}"
+                   href="/buses/add-seat/{{busid}}/{{row_i}}/{{forloop.counter}}">Добавить место</a>
+                <a class="popover_toggle" data-popover-content="popover2_{{ row_i }}_{{ forloop.counter }}"
+                   href="/buses/add-space/{{busid}}/{{row_i}}/{{forloop.counter}}">Добавить проход</a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Удаление кресел по кнопке -->
+    {% if 'space' not in seat %}
+
+    <div id="popover{{ row_i }}_{{ forloop.counter }}" class="popover_window">
+        <div class="popover_window_container">
+            <button class="close_btn popover_toggle" data-popover-content="popover{{ row_i }}_{{ forloop.counter }}">
+                <img src="{% static 'images/buses/close.svg' %}"></button>
+            <div class="popover-body">
+                <form action="/buses/set-seat-n/{{busid}}/{{row}}/{{forloop.counter}}" method="POST">
+                    {% csrf_token %}
+                    <div class="input_container">
+                        <div class="popover-heading">Ряд {{ scheme|get:row_i|get:"row_n" }}, место</div>
+                        <input type="text" name="seat-name" id="seat_name_{{ row_i }}_{{ forloop.counter }}"
+                               class="form-control" value='{{ seat|get:"seat_n" }}'>
+                    </div>
+
+
+                    <div class="save_remove_container">
+                        <button class="save_btn popover_toggle"
+                                data-popover-content="popover{{ row_i }}_{{ forloop.counter }}" type="submit"><img
+                                src="{% static 'images/buses/save.svg' %}"></button>
+                        <a class="remove_btn popover_toggle"
+                           data-popover-content="popover{{ row_i }}_{{ forloop.counter }}"
+                           href="/buses/delete-seat/{{busid}}/{{row_i}}/{{forloop.counter}}"><img
+                                src="{% static 'images/buses/remove.svg' %}"></a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    {% else %}
+
+    <div id="popover2{{ row_i }}_{{ forloop.counter }}" class="popover_window popover_window_gap">
+        <div class="popover_window_container">
+            <button class="close_btn popover_toggle" data-popover-content="popover2{{ row_i }}_{{ forloop.counter }}">
+                <img src="{% static 'images/buses/close.svg' %}"></button>
+            <div class="popover-heading">Проход</div>
+            <a class="remove_btn popover_toggle" href="/buses/delete-seat/{{busid}}/{{row_i}}/{{forloop.counter}}"><img
+                    src="{% static 'images/buses/remove.svg' %}"></a>
+        </div>
+    </div>
+
+    {% endif %}
+
+    {% endfor %}
+
+
+    <div id="popover_add_seat_{{row_i}}" class="popover_window popover_window_add_place">
+        <div class="popover_window_container">
+            <button class="close_btn popover_toggle" data-popover-content="popover_add_seat_{{row_i}}"><img
+                    src="{% static 'images/buses/close.svg' %}"></button>
+
+            <div class="popover-heading">Добавление места</div>
+
+            <div class="add_place_container">
+                <a class="popover_toggle" data-popover-content="popover_add_seat_{{row_i}}"
+                   href="/buses/add-seat/{{busid}}/{{row_i}}">Добавить место</a>
+                <a class="popover_toggle" data-popover-content="popover_add_seat_{{row_i}}"
+                   href="/buses/add-space/{{busid}}/{{row_i}}">Добавить проход</a>
+            </div>
+
+            <!-- <div class="popover-heading">Добавление места</div>
+            <div class="popover-body">
+                <a class="popover_toggle" data-popover-content="popover_add_seat_{{row_i}}"
+                href="/buses/add-seat/{{busid}}/{{row_i}}">Добавить место</a>
+                <a class="popover_toggle" data-popover-content="popover_add_seat_{{row_i}}"
+                href="/buses/add-space/{{busid}}/{{row_i}}">Добавить проход</a>
+            </div> -->
+        </div>
+    </div>
+
+    {% endwith %}
+
+    {% endfor %}
+</div>
+
+
+<div class="blurred_container">
+    {% include 'header.html' %}
+    <div class="seat_container">
+        <h1 class="title">Изменение рассадки</h1>
+        <p class="save_info">Изменения в схеме рассадки сохраняются автоматически</p>
+        <div class="column">
+            {% for row in scheme %}
+            <div class="row">
+                <button class="row_button popover_toggle" tabindex="0" data-popover-content="popover_row_{{ row }}">
+                    Ряд {{scheme|get:row|get:"row_n" }}
+                </button>
+                <!-- <div id="popover_row_{{ row }}" class="popover_window popover_window_rowedit">
+                    <div class="popover_window_container">
+                        <button class="close_btn popover_toggle" data-popover-content="popover_row_{{ row }}"><img src="{% static 'images/buses/close.svg' %}"></button>
+                        <div class="popover_heading">Ряд {{ scheme|get:row|get:"row_n" }}</div>
+                        <div class="popover_body">
+                            <form action="/buses/set-row-n/{{busid}}/{{row}}" method="POST">
+                                {% csrf_token %}
+                                <input type="text" name="row-name" class="row_name" id="row_name_{{ row }}"
+                                    class="form-control" placeholder="ряд" value='{{scheme|get:row|get:"row_n"}}'>
+
+                                <div class="save_remove_container">
+                                    <button class="save_btn popover_toggle" data-popover-content="popover_row_{{ row }}" type="submit"><img src="{% static 'images/buses/save.svg' %}"></button>
+                                    <a class="remove_btn popover_toggle" data-popover-content="popover_row_{{ row }}" href="/buses/delete-row/{{busid}}/{{ row }}"><img src="{% static 'images/buses/remove.svg' %}"></a>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div> -->
+
+
+                {% with row_i=forloop.counter %}
+                {% for seat in scheme|get:row|get:"data" %}
+
+                <!-- Добавление кресел между другими креслами -->
+                <button class="addchair_btn popover_toggle"
+                        data-toggle="popover"
+                        data-popover-content="popover2_{{ row_i }}_{{ forloop.counter }}">+
+                </button>
+
+                <!-- <div id="popover2_{{ row_i }}_{{ forloop.counter }}" class="popover_window">
+                    <div class="popover_window_container">
+                        <button class="close_btn" data-popover-content="popover2_{{ row_i }}_{{ forloop.counter }}"><img src="{% static 'images/buses/close.svg' %}"></button>
+                        <div class="popover-heading">Добавление места</div>
+                        <div class="popover-body">
+                            <a class="popover_toggle" data-popover-content="popover2_{{ row_i }}_{{ forloop.counter }}" href="/buses/add-seat/{{busid}}/{{row_i}}/{{forloop.counter}}">Добавить место</a>
+                            <a class="popover_toggle" data-popover-content="popover2_{{ row_i }}_{{ forloop.counter }}" href="/buses/add-space/{{busid}}/{{row_i}}/{{forloop.counter}}">Добавить проход</a>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Удаление кресел по кнопке -->
+                {% if 'space' not in seat %}
+
+                <div class="place_container">
+                    {% load static %}
+                    <img src="{% static 'images/buses/armchair.svg' %}">
+                    <button class="the_seat popover_toggle" tabindex="0"
+                            data-popover-content="popover{{ row_i }}_{{ forloop.counter }}">
+                        {{seat|get:"seat_n"}}
+                    </button>
+                </div>
+
+                <!-- <div id="popover{{ row_i }}_{{ forloop.counter }}" class="popover_window">
+                    <div class="popover_window_container">
+                        <button class="close_btn popover_toggle" data-popover-content="popover{{ row_i }}_{{ forloop.counter }}"><img src="{% static 'images/buses/close.svg' %}"></button>
+                        <div class="popover-heading">Ряд {{ scheme|get:row_i|get:"row_n" }}, место {{ seat|get:"seat_n" }}</div>
+                        <div class="popover-body">
+                            <form action="/buses/set-seat-n/{{busid}}/{{row}}/{{forloop.counter}}" method="POST">
+                                {% csrf_token %}
+                                <input type="text" name="seat-name" id="seat_name_{{ row_i }}_{{ forloop.counter }}"
+                                    class="form-control" placeholder="ряд" value="">
+
+                                <div class="save_remove_container">
+                                    <button class="save_btn popover_toggle" data-popover-content="popover{{ row_i }}_{{ forloop.counter }}" type="submit"><img src="{% static 'images/buses/save.svg' %}"></button>
+                                    <a class="remove_btn popover_toggle" data-popover-content="popover{{ row_i }}_{{ forloop.counter }}" href="/buses/delete-seat/{{busid}}/{{row_i}}/{{forloop.counter}}"><img src="{% static 'images/buses/remove.svg' %}"></a>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div> -->
+                {% else %}
+
+                <button class="gap popover_toggle" tabindex="0" data-toggle="popover"
+                        data-popover-content="popover2{{ row_i }}_{{ forloop.counter }}">
+                </button>
+
+                <!-- <div id="popover2{{ row_i }}_{{ forloop.counter }}" class="popover_window">
+                    <div class="popover_window_container">
+                        <button class="close_btn popover_toggle" data-popover-content="popover2{{ row_i }}_{{ forloop.counter }}"><img src="{% static 'images/buses/close.svg' %}"></button>
+                        <div class="popover-heading">Проход</div>
+                        <div class="popover-body">
+                            <a class="remove_btn popover_toggle" href="/buses/delete-seat/{{busid}}/{{row_i}}/{{forloop.counter}}"><img src="{% static 'images/buses/remove.svg' %}"></a>
+                        </div>
+                    </div>
+                </div> -->
+
+                {% endif %}
+
+                {% endfor %}
+
+                <button class="addchair_btn popover_toggle" data-toggle="popover"
+                        data-popover-content="popover_add_seat_{{row_i}}">+
+                </button>
+
+                <!-- <div id="popover_add_seat_{{row_i}}" class="popover_window">
+                    <div class="popover_window_container">
+                        <button class="close_btn popover_toggle" data-popover-content="popover_add_seat_{{row_i}}"><img src="{% static 'images/buses/close.svg' %}"></button>
+                        <div class="popover-heading">Добавление места</div>
+                        <div class="popover-body">
+                            <a class="popover_toggle" data-popover-content="popover_add_seat_{{row_i}}"
+                            href="/buses/add-seat/{{busid}}/{{row_i}}">Добавить место</a>
+                            <a class="popover_toggle" data-popover-content="popover_add_seat_{{row_i}}"
+                            href="/buses/add-space/{{busid}}/{{row_i}}">Добавить проход</a>
+                        </div>
+                    </div>
+                </div> -->
+                {% endwith %}
+            </div>
+            {% endfor %}
+
+        </div>
+        <a class="add_row_btn" href="/buses/add-row/{{busid}}">добавить ряд</a>
+
+        <a class="back_btn" href="/edit-bus/{{busid}}">Назад</a>
+    </div>
+</div>
+
+
+<script>
+
+window.onload = () => {
+    document.querySelectorAll('.popover_toggle').forEach((element) => {
+        element.addEventListener('click', (e) => {
+            console.log('clicked');
+            let target = e.target;
+            let popover_window_id = target.getAttribute("data-popover-content");
+
+            let popover_window = document.getElementById(`${popover_window_id}`);
+            popover_window.classList.toggle('popover_window_active');
+
+            if (popover_window.classList.contains('popover_window_active')) {
+                let input = popover_window.querySelector('input[type="text"]');
+                if (input) {
+                    input.focus();
+                    setTimeout(function(){ input.selectionStart = input.selectionEnd = 10000; }, 0); // support for more browsers 
+                }
+            }
+            document.querySelector('.blurred_container').classList.toggle('blurred_container_active');
+        })
+    });
+
+}
+
+
+// $(function() {
+//   $("[data-toggle=popover]").popover({
+//     html: true,
+//     placement:"right",
+//     content: function() {
+//       var content = $(this).attr("data-popover-content");
+//       return $(content).children(".popover-body").html();
+//     },
+//     title: function() {
+//       var title = $(this).attr("data-popover-content");
+//       return $(title).children(".popover-heading").html();
+//     }
+//   });
+// });
+
+</script>
+
+
+{% endblock %}

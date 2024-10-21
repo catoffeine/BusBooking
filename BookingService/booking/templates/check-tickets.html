@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'styles.min.css' %}">
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-6724419004010752",
+		enable_page_level_ads: true
+	  });
+
+
+    </script>
+</head>
+
+<body>
+
+{% include 'header.html' %}
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+
+
+<div class="check_tickets_container">
+    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+
+    <div class="check_tickets_inner_container">
+        <div class="video_preview">
+            <video id="preview"></video>
+        </div>
+
+        <div class="camera_buttons_container" data-toggle="buttons">
+
+            <button class="change_camera_view"><img src="{% static 'images/tickets/reverse_camera.svg' %}"></button>
+            <!-- <label class="active">
+                <input type="radio" name="options" value="1" autocomplete="off" checked> Front Camera
+            </label>
+            <label>
+                <input type="radio" name="options" value="2" autocomplete="off"> Back Camera
+            </label> -->
+        </div>
+    </div>
+
+    <a class="back_btn" href="/">Назад</a>
+
+
+        <!-- <div class="col-sm-3">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                 <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-6724419004010752"
+                 data-ad-slot="7706376079"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+
+
+            </script>
+        </div> -->
+
+</div>
+
+<script type="text/javascript">
+    var scanner = new Instascan.Scanner({ video: document.getElementById('preview'), scanPeriod: 5, mirror: false });
+    scanner.addListener('scan',function(content){
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/check-ticket-data/{{tid}}/" + content);
+        xhr.setRequestHeader("X-CSRFToken", "{{csrf_token}}");
+        xhr.send();
+        xhr.responseType = "json";
+        xhr.onload = () => {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+            const data = xhr.response;
+            console.log(data);
+            alert(data['data']);
+            } else {
+            console.log(`Error: ${xhr.status}`);
+            }
+        };
+        //window.location.href=content;
+    });
+    Instascan.Camera.getCameras().then(function (cameras){
+        if(cameras.length>0){
+            scanner.start(cameras[0]);
+            $('.change_camera_view').on('click', (e) => {
+                let target = e.target;
+                
+                target.classList.toggle('onclick_animation');
+                
+                setTimeout(() => {
+                    target.classList.toggle('onclick_animation');
+                }, 650);
+
+                if (target.classList.contains('active')) {
+                    if(cameras[0]!=""){
+                        scanner.start(cameras[0]);
+                    }else{
+                        alert('No Front camera found!');
+                    }
+                } else {
+                    if(cameras[1] != "") {
+                        scanner.start(cameras[1]);
+                    }else{
+                        alert('No Back camera found!');
+                    }
+                }
+                target.classList.toggle('active');
+            })
+            // $('[name="options"]').on('change',function(){
+            //     if($(this).val()==1){
+            //         if(cameras[0]!=""){
+            //             scanner.start(cameras[0]);
+            //         }else{
+            //             alert('No Front camera found!');
+            //         }
+            //     }else if($(this).val()==2){
+            //         if(cameras[1]!=""){
+            //             scanner.start(cameras[1]);
+            //         }else{
+            //             alert('No Back camera found!');
+            //         }
+            //     }
+            // });
+        }else{
+            console.error('No cameras found.');
+            alert('No cameras found.');
+        }
+    }).catch(function(e){
+        console.error(e);
+        alert(e);
+
+    });
+            
+</script>
+
+</body>
+</html>

@@ -1,0 +1,316 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<header class="about_header">
+    <div class="logocontainer">
+        
+        <img src="{% static 'images/auth/logo.svg' %}" alt="" style="width: 90px; height: auto;">
+    </div>
+
+    <div class="sections_container">
+        <a class="sign_in" href="/">Вход</a>
+        <a class="sign_up" href="/">Регистрация</a>
+    </div>
+</header>
+
+<div class="about_container">
+    <div class="graphics_banner">
+        <img src="{% static 'images/auth/logo.svg' %}">
+    </div>
+
+    <div class="new_section">
+        <h2 class="section_subtitle">Найти билеты</h2>
+    </div>
+
+    <form class="search_tickets_form" method="post">
+        {% csrf_token %}
+
+        <div class="flex_container">
+
+            <div class="form_item_container">
+                <p class="input_info">Дата отправления</p>
+                {{ form.date }}
+                {{ form.date.errors }}
+            </div>
+
+            
+            <div class="form_item_container datalist-control">
+                <fieldset>
+                    <p class="input_info">Пункт отправления</p>
+                    {{ form.from_f }}
+                    {{ form.from_f.errors }}
+                    
+                    <datalist id="departure_point" role="listbox">
+                        <option value="Москва пункт 1">Москва пункт 1</option>
+                        <option value="Москва пункт 2">Москва пункт 2</option>
+                        <option value="Москва пункт 3">Москва пункт 3</option>
+                        <option value="Москва пункт 4">Москва пункт 4</option>
+                        <option value="СПб пункт 1">СПб пункт 1</option>
+                        <option value="СПб пункт 2">СПб пункт 2</option>
+                        <option value="СПб пункт 3">СПб пункт 3</option>
+                        <option value="СПб пункт 4">СПб пункт 4</option>
+                    </datalist>
+                </fieldset>
+                
+            </div>
+
+            <div class="form_item_container datalist-control">
+                <fieldset>
+                    <p class="input_info">Пункт назначения</p>
+                    {{ form.to_f }}
+                    {{ form.to_f.errors }}
+                    <datalist id="destination_point" role="listbox">
+                        <option value="Moscow">Москва пункт 1 fjsdkfjlsjg jgls lgsj ljsgj sjlsgj gjslg jlsgh shklg hslgh shg</option>
+                        <option value="Moscow">Москва пункт 2</option>
+                        <option value="Moscow">Москва пункт 3</option>
+                        <option value="Moscow">Москва пункт 4</option>
+                        <option value="SPb">СПб пункт 1</option>
+                        <option value="SPb">СПб пункт 2</option>
+                        <option value="SPb">СПб пункт 3</option>
+                        <option value="SPb">СПб пункт 4</option>
+                    </datalist>
+                </fieldset>
+            </div>
+            
+        </div>
+
+        <button type="submit">Найти</button>
+    </form>
+
+    <div class="new_section">
+        <h2 class="section_subtitle">Доступные билеты</h2>
+    </div>
+
+    <div class="trip_card">
+        <div class="trip_card_inner_container">
+            
+            <div class="id_price_container">
+                <div class="id_container">
+                    <div class="title">
+                        номер маршрута
+                    </div>
+                    <div class="id">
+                        MGW12
+                        {{trip.route.name}}
+                    </div>
+                </div>
+                <div class="price_container">
+                    <div class="title">цена билета</div>
+                    <div class="price">1990 <span>руб.</span></div>
+                </div>
+            </div>
+
+            <div class="stops_container"> 
+                <div class="title">маршрут</div>
+                <div class="stops">Сочи-Москва-Санкт Петербург</div>
+            </div>
+
+            <div class="time_container"> 22.02.2023 00:29 {{trip.start_dt|date:"H:i"}}</div>
+
+            <a href="/view-trip/{{trip.id}}" class="choose_place">Выбрать место</a>
+
+            <!-- <div class="start_dt">
+                {{trip.start_dt|date:"H:i"}}
+            </div> -->
+        </div>
+    </div>
+
+    <div class="trip_card">
+        <div class="trip_card_inner_container">
+            
+            <div class="id_price_container">
+                <div class="id_container">
+                    <div class="title">
+                        номер маршрута
+                    </div>
+                    <div class="id">
+                        MGW12
+                        {{trip.route.name}}
+                    </div>
+                </div>
+                <div class="price_container">
+                    <div class="title">цена билета</div>
+                    <div class="price">1990 <span>руб.</span></div>
+                </div>
+            </div>
+
+            <div class="stops_container"> 
+                <div class="title">маршрут</div>
+                <div class="stops">Сочи-Москва-Санкт Петербург</div>
+            </div>
+
+            <div class="time_container"> 22.02.2023 00:29 {{trip.start_dt|date:"H:i"}}</div>
+
+            <a href="/view-trip/{{trip.id}}" class="choose_place">Выбрать место</a>
+
+            <!-- <div class="start_dt">
+                {{trip.start_dt|date:"H:i"}}
+            </div> -->
+        </div>
+    </div>
+
+    <div class="trip_card">
+        <div class="trip_card_inner_container">
+            
+            <div class="id_price_container">
+                <div class="id_container">
+                    <div class="title">
+                        номер маршрута
+                    </div>
+                    <div class="id">
+                        MGW12
+                        {{trip.route.name}}
+                    </div>
+                </div>
+                <div class="price_container">
+                    <div class="title">цена билета</div>
+                    <div class="price">1990 <span>руб.</span></div>
+                </div>
+            </div>
+
+            <div class="stops_container"> 
+                <div class="title">маршрут</div>
+                <div class="stops">Сочи-Москва-Санкт Петербург</div>
+            </div>
+
+            <div class="time_container"> 22.02.2023 00:29 {{trip.start_dt|date:"H:i"}}</div>
+
+            <a href="/view-trip/{{trip.id}}" class="choose_place">Выбрать место</a>
+
+            <!-- <div class="start_dt">
+                {{trip.start_dt|date:"H:i"}}
+            </div> -->
+        </div>
+    </div>
+
+    <div class="trip_card">
+        <div class="trip_card_inner_container">
+            
+            <div class="id_price_container">
+                <div class="id_container">
+                    <div class="title">
+                        номер маршрута
+                    </div>
+                    <div class="id">
+                        MGW12
+                        {{trip.route.name}}
+                    </div>
+                </div>
+                <div class="price_container">
+                    <div class="title">цена билета</div>
+                    <div class="price">1990 <span>руб.</span></div>
+                </div>
+            </div>
+
+            <div class="stops_container"> 
+                <div class="title">маршрут</div>
+                <div class="stops">Сочи-Москва-Санкт Петербург</div>
+            </div>
+
+            <div class="time_container"> 22.02.2023 00:29 {{trip.start_dt|date:"H:i"}}</div>
+
+            <a href="/view-trip/{{trip.id}}" class="choose_place">Выбрать место</a>
+
+            <!-- <div class="start_dt">
+                {{trip.start_dt|date:"H:i"}}
+            </div> -->
+        </div>
+    </div>
+
+    <a class="show_more_tickets" href="#">Показать еще</a>
+
+    <div class="new_section">
+        <h2 class="section_subtitle">Как просто оформить билет</h2>
+    </div>
+
+    <div class="ticket_instruction_container">
+        <div class="ticket_instruction_item">
+            <div class="number">1</div>
+            <div class="info_container">
+                <div class="title">
+                    Выберите билет
+                </div>
+                <div class="info">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </div>
+                
+            </div>
+            <img src="{% static 'images/about/choose_ticket.svg' %}" alt="">
+            
+        </div>
+
+        <div class="ticket_instruction_item">
+            <div class="number">2</div>
+            <div class="info_container">
+                <div class="title">
+                    Выберите место
+                </div>
+                <div class="info">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </div>
+                
+            </div>
+            <img class="seat_img" src="{% static 'images/about/seat.svg' %}" alt="">
+            
+        </div>
+
+        <div class="ticket_instruction_item">
+            <div class="number">3</div>
+            <div class="info_container">
+                <div class="title">
+                    Готово!
+                </div>
+                <div class="info">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </div>
+                
+            </div>
+            <img class="ready_img" src="{% static 'images/about/ok.svg' %}" alt="">
+            
+        </div>
+    </div>
+
+    <div class="new_section">
+        <h2 class="section_subtitle">Новости</h2>
+    </div>
+
+    <div class="news_section">
+        <div class="news_title">Where is Lorem?</div>
+        <div class="news_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic dolores ex dolorem quas totam suscipit sapiente sunt libero praesentium assumenda quos, vel tenetur ipsam culpa, minus magni similique est, tempore esse voluptate et! Beatae consequatur, dolorum magni ab, autem illo, modi aspernatur minus illum provident corporis alias architecto distinctio quos.</div>
+
+        <div class="news_title">Who is Lorem?</div>
+        <div class="news_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic dolores ex dolorem quas totam suscipit sapiente sunt libero praesentium assumenda quos, vel tenetur ipsam culpa, minus magni similique est, tempore esse voluptate et! Beatae consequatur, dolorum magni ab, autem illo, modi aspernatur minus illum provident corporis alias architecto distinctio quos.</div>
+    </div>
+
+</div>
+<footer class="about_footer">
+    <div class="footer_container">
+        <div class="footer_section">
+            <div class="section_item">
+                Телефон горячей линии<br>
+                <span>88002019071</span>
+            </div>
+            <div class="section_item">
+                Почта<br>
+                <span>m@fjekgjeg.ru</span>
+            </div>
+        </div>
+
+        <div class="footer_section">
+            <div class="section_item">
+                vk: vk.com/loremipsum
+            </div>
+            <div class="section_item">
+                telegram: @loremipsum
+            </div>
+        </div>
+
+        <div class="footer_section">
+            <div class="section_item"></div>
+            <div class="section_item"></div>
+        </div>
+
+    </div>
+</footer>
+
+{% endblock %}

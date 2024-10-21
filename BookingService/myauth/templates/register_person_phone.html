@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load static %}
+<div class="container">
+    {% include 'logo_title.html' %}
+    <img id="background_image">
+    <div class="container_auth">
+        <h1 class="sign_up_title">Регистрация</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="sign_up_form sign_up_form_flexcontainer">
+                {{ form.phone }}
+                
+                <div class="checkbox_flexcontainer">
+                    <input class="form-check-input" type="checkbox" value="" id="oferta">
+                    <label for="oferta"></label>
+                    <label class="form-check-label" for="oferta">
+                        Принимаю <a href="/oferta" target="_blank">договор оферты</a>
+                    </label>
+                </div>
+                
+                <div class="checkbox_flexcontainer">
+                    <input class="form-check-input" type="checkbox" value="" id="pd">
+                    <label class="form-check-label" for="pd">
+                        Принимаю <a href="/rules" target="_blank">правила сервиса</a>
+                    </label>
+                </div>
+                
+
+                <button type="submit" id="submitBtn" class="" disabled>ЗАРЕГИСТРИРОВАТЬСЯ</button>
+            </div>
+        </form>
+        <div class="account_info_question">Уже есть аккаунт? <a href="/auth/{{role}}/login" style="margin-top: 15px;">Вход {{header_text}}</a></div>
+    </div>
+</div>
+
+<script src="{% static 'js/phone_validation.js' %}"></script>
+
+{% endblock %}

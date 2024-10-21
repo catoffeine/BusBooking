@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'header.html' %}
+<div class="container">
+    <h2>{{label}}</h2>
+    <form class="search_tickets_form" method="post">
+        {% csrf_token %}
+
+        <div class="flex_container">
+
+            <div class="form_item_container">
+                <p class="input_info">Дата отправления</p>
+                {{ form.date }}
+                {{ form.date.errors }}
+            </div>
+
+
+            <div class="form_item_container datalist-control">
+                <fieldset>
+                    <p class="input_info">Пункт отправления</p>
+                    {{ form.from_f }}
+                    {{ form.from_f.errors }}
+
+                    <datalist id="departure_point" role="listbox">
+                        {% for stop in stops %}
+                        <option value="{{stop}}">{{stop}}</option>
+                        {% endfor %}
+                    </datalist>
+                </fieldset>
+
+            </div>
+
+            <div class="form_item_container datalist-control">
+                <fieldset>
+                    <p class="input_info">Пункт назначения</p>
+                    {{ form.to_f }}
+                    {{ form.to_f.errors }}
+                    <datalist id="destination_point" role="listbox">
+                        {% for stop in stops %}
+                        <option value="{{stop}}">{{stop}}</option>
+                        {% endfor %}
+                    </datalist>
+                </fieldset>
+            </div>
+
+        </div>
+
+        <button type="submit">Найти</button>
+    </form>
+
+    <a class="back_btn" href="/">Назад</a>
+</div>
+
+{% load static %}
+
+<script src="{% static 'js/dropdown_search.js' %}">
+
+</script>
+{% endblock %}

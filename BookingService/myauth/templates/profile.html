@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% include 'header.html' %}
+
+<div class="profile_container">
+
+    <h2 class="title">{{label}}</h2>
+
+    <form autocomplete="off" method="post">
+        {% csrf_token %}
+
+        <div class="section_title">О себе</div>
+
+        <div class="info_double_container">
+            <div class="info_container">
+                <p class="title">Фамилия</p>
+                <p class="info">{{form.surname}}</p>
+            </div>
+    
+            <div class="info_container">
+                <p class="title">Имя</p>
+                <p class="info">{{form.name}}</p>
+            </div>
+
+            <div class="info_container">
+                <p class="title">Отчество</p>
+                <p class="info">{{form.middlename}}</p>
+            </div>
+
+        </div>
+
+        
+
+        
+
+
+        <div class="section_title">Паспортные данные</div>
+
+        <div class="info_double_container">
+            <div class="info_container">
+                <p class="title">Серия</p>
+                <p class="info">{{form.passport_series}}</p>
+            </div>
+    
+            <div class="info_container">
+                <p class="title">Номер</p>
+                <p class="info">{{form.passport_number}}</p>
+            </div>
+
+        </div>
+
+            
+
+        <a class="change_password" href="set-new-password">Поменять пароль</a>
+
+        <button class="save_btn" type="submit">Сохранить</button>
+
+    </form>
+
+    <a class="back_btn" href="/">Назад</a>
+
+</div>
+
+{% endblock %}

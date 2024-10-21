@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% include 'header.html' %}
+<div class="view_trip_container">
+
+    <h1 class="route_name">{{trip.route.name}}</h1>
+
+    <div class="info_container">
+            <p class="title">Водитель</p>
+            <p class="info">{{trip.driver}}</p>
+    </div>
+
+    <div class="info_container">
+        <p class="title">Автобус</p>
+        <p class="info">{{trip.bus}}</p>
+    </div>
+
+    <div class="info_container">
+        <p class="title">Маршрут</p>
+        <p class="info">{{trip.route}}</p>
+    </div>
+
+    <div class="info_container info_container_last">
+        <p class="title">Дата и время отправления</p>
+        <p class="info">{{trip.start_dt}}</p>
+    </div>
+
+    <div class="place_container">
+        <a href="/choose-seat/{{tid}}" class="choose_place">Выбрать место</a>
+
+        <a href="/search-trips" class="back_btn">Назад</a>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% include 'header.html' %}
+<div class="mytickets_container">
+    <h2 class="title">Билеты</h2>
+
+    {% for ticket in tickets %}
+
+        <div class="ticket_card" style="width:340px;">
+            <div class="ticket_card_inner_container">
+
+                <div class="id_place_container">
+                    <div class="place_container">
+                        <div class="title">
+                            Место
+                        </div>
+                        <div class="place">
+                            {% if not ticket.is_returned %}
+                            {{ticket.seat}}
+                            {% else %}
+                            {{ticket.prev_seat}}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="id_container">
+                        <span class="id_0">ID#<span class="id">{{ticket.id}}</span></span>
+                    </div>
+
+                </div>
+
+
+<!--                <div class="code_container">-->
+<!--                    <div class="title">Код</div>-->
+<!--                    <div class="code">{{ticket.ticket_code}}</div>-->
+<!--                </div>-->
+
+                <div class="trip_container">
+                    <div class="title">Поездка</div>
+                    <div class="trip">{{ticket.trip}}</div>
+                </div>
+
+                {% if not ticket.is_returned %}
+                <div class="check_ticket_container">
+                    <a href="/view-ticket/{{ticket.ticket_code}}" class="check_ticket">Посмотреть билет</a>
+
+                </div>
+
+                {% else %}
+                    <p class="ticket_returned_info" style="width: 100%; text-align: center; margin-top: 15px; opacity: 0.7;">Билет недействителен</p>
+                {% endif %}
+            </div>
+        </div>
+
+    {% endfor %}
+
+    <!-- <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Код</th>
+            <th scope="col">Место</th>
+            <th scope="col">Поездка</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for ticket in tickets %}
+        <tr>
+            <th scope="row">{{ticket.id}}</th>
+            <td>{{ticket.ticket_code}}</td>
+            <td>{{ticket.seat}}</td>
+            <td>{{ticket.trip}}</td>
+            {% if not ticket.is_returned %}
+            <td><a href="/view-ticket/{{ticket.ticket_code}}" class="btn btn-primary">Посмотреть билет</a></td>
+            {% else %}
+            <td>Билет возвращён или рейс отменён</td>
+            <td></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table> -->
+    <a class="back_btn" href="/">Назад</a>
+
+</div>
+
+
+
+
+{% endblock %}

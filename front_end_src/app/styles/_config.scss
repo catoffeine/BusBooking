@@ -1,0 +1,131 @@
+// USER VARIABLES SECTION
+
+$accent_color: #F89A1E; // Accent Color
+$input_info_color: #929292;
+$fontsize: 16px; // Body Font Size
+$textcolor: #555555; // Text Color
+$textinvertcolor: #ffffff;
+$lineheight: 1.65; // Document Line Height
+$userfont: roboto-oh5, sans-serif; // User Font Family
+$systemfont: -apple-system, BlinkMacSystemFont, Arial, sans-serif; // System Font Family
+$errortext_color: #f33e3e;
+$passwordreq_color: #f30a0a8e;
+$correct_textcolor: #73ca50;
+
+$text_unactive: #B0B0B0;
+$textmain_color: $accent_color;
+
+
+
+// FONTS LOAD SECTION
+
+@mixin font($fname, $fstyle, $fweight, $furl) {
+    @font-face {
+        src: url($furl) format('woff2');
+        font-family: $fname;
+		font-style: $fstyle;
+		font-weight: $fweight;
+    }
+}
+
+@mixin responsive($breakpoint) {
+    @if $breakpoint == phone_400 {
+        @media only screen and (max-width: 400px) {
+            @content;
+        }
+    }
+
+    @if $breakpoint == pc_700 {
+        @media only screen and (max-width: 700px) {
+            @content;
+        }
+    }
+}
+
+@include font('roboto-oh5', normal, 400, "fonts/roboto-regular-webfont.woff2");
+@include font('roboto-oh5', italic, 400, "fonts/roboto-italic-webfont.woff2");
+@include font('roboto-oh5', normal, 700, 'fonts/roboto-bold-webfont.woff2');
+@include font('roboto-oh5', italic, 700, 'fonts/roboto-bolditalic-webfont.woff2');
+@include font('reosans', normal, 400, "fonts/ReoSansMedium.woff2");
+
+// GENERAL CSS SETTINGS
+
+::placeholder {
+    color: #666;
+}
+	
+
+::selection {
+    background-color: $accent_color;
+	color: #fff;
+}
+	
+
+input, textarea {
+    outline: none;
+	&:focus:required:invalid {
+        border-color: red;
+    }
+		
+	&:required:valid {
+        border-color: green;
+    }
+		
+}
+
+#background_image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background-image: url('images/everything/background.jpg');
+    background-repeat: no-repeat;
+    background-size:cover;
+    opacity: 0.1;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+
+}
+	
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    font-family: $userfont;
+    text-decoration: none;
+    // white-space: nowrap;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: $userfont;
+	font-size: $fontsize;
+	line-height: $lineheight;
+	color: $textcolor;
+	position: relative;
+	// overflow-x: hidden;
+    height: 100%;
+}
+
+a:active, a:focus {
+    outline: 0;
+    border: none;
+    box-shadow: none;
+}

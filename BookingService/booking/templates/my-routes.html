@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- <img id="background_image"> -->
+{% include 'header.html' %}
+
+<div class="routes_container">
+    <h2 class="title">Маршруты</h2>
+    <a href="add-route" class="add_route">Добавить маршрут</a>
+
+    {% for route in routes %}
+
+    <ul class="list_routes">
+        <li class="list_routes_item">
+
+            <div class="id_container">
+                <div class="name">{{route.name}}</div>
+                <div class="id">
+                    <span class="id_0">ID</span><span class="id_1">#</span><span class="id_2">{{route.id}}</span>
+                </div>
+            </div>
+
+            <div class="stops_container">
+                <p>остановки:</p>
+                <div class="stops">{{route.stops}}</div>
+            </div>
+
+            <div class="edit_remove_container">
+                <div><a href="/edit-route/{{route.id}}" class="edit">редактировать</a></div>
+                <div><a href="/delete-route/{{route.id}}" class="remove">удалить</a></div>
+            </div>
+
+        </li>
+    </ul>
+
+    {% endfor %}
+
+    <a class="back_btn" href="/">Назад</a>
+</div>
+
+
+
+<!-- <table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">N</th>
+        <th scope="col">Остановки</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for route in routes %}
+    <tr>
+        <th scope="row">{{route.id}}</th>
+        <th scope="row">{{route.name}}</th>
+        <td>{{route.stops}}</td>
+        <td><a href="/edit-route/{{route.id}}">Редактировать</a></td>
+        <td><a href="/delete-route/{{route.id}}">Удалить</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table> -->
+
+
+
+
+
+
+{% endblock %}

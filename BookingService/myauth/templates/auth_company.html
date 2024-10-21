@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- <div class="container"> -->
+    <img id="background_image">
+    <div class="container_auth">
+        {% include 'logo_title.html' %}
+        <h1 class="sign_up_title">{{label}} {{header_text}}</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="sign_up_form sign_up_form_flexcontainer">
+                {{ form.email }}
+                <input type="text" name="password" class="form-control password_input" placeholder="Пароль" maxlength="128" required id="id_password">
+                <span>{{form.email.errors}}</span>
+                <span>{{form.password.errors}}</span>
+
+                {% if label == 'Регистрация' %}
+
+                <div class="checkbox_flexcontainer">
+                    <input class="form-check-input" type="checkbox" value="" id="oferta">
+                    <label for="oferta"></label>
+                    <label class="form-check-label" for="oferta">
+                        Принимаю <a href="/oferta">договор оферты</a>
+                    </label>
+                </div>
+
+                <div class="checkbox_flexcontainer">
+                    <input class="form-check-input" type="checkbox" value="" id="pd">
+                    <label class="form-check-label" for="pd">
+                        Принимаю <a href="/rules">правила сервиса</a>
+                    </label>
+                </div>
+
+                {% endif %}
+
+                {% if label == 'Вход' %}
+                <button type="submit" id="submitBtn">{{label}}</button>
+                {% else %}
+                <button type="submit" id="submitBtn" disabled>{{label}}</button>
+                {% endif %}
+                
+            </div>
+            
+        </form>
+        {% if label == 'Вход' %}
+        <div class="account_info_question">Нет аккаунта? <a class="registration_button" href="/auth/{{role}}/registration"> Регистрация {{header_text}}</a></div>
+        {% else %}
+        <div class="account_info_question">Уже есть аккаунт? <a href="/auth/{{role}}/login" style="margin-top: 15px;">Вход {{header_text}}</a></div>
+        <div class="setpassword_container">
+            <div class="item capital">пароль содержит хотя бы 1 прописную букву (A-Z) </div>
+            <div class="item lowercase">пароль содержит хотя бы 1 строчную букву (a-z) </div>
+            <div class="item number">пароль содержит хотя бы 1 цифру (0-9)</div>
+            <div class="item length">пароль содержит 8 и более символов</div>
+        </div>
+        {% endif %}
+        
+    </div>
+<!-- </div> -->
+{% load static %}
+{% if label != 'Вход' %}
+    <script src="{% static 'js/password_requirements.js' %}"></script>
+{% endif %}
+
+{% endblock %}
+

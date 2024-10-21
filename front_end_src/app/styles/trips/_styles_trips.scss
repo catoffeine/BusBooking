@@ -1,0 +1,523 @@
+.view_trip_container {
+    margin: 0 auto;
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+    height: 100%;
+    width: 100%;
+
+    .info_container {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        width: 290px;
+        // flex-shrink: width;
+        // flex-basis: 300px 0;
+        // max-width: 300px;
+        padding: 10px 0;
+        border-bottom: 1px solid #D9D9D9;
+        &:first-of-type {
+            border-top: 1px solid #D9D9D9;
+        }
+        .title {
+            font-size: 16px;
+            line-height: 16px;
+            color: $input_info_color;
+        }
+        .info {
+            margin-top: 5px;
+            font-size: 20px;
+            line-height: 20px;
+            color: $accent_color;
+        }
+
+        
+    }
+
+    .route_name {
+        text-align: center;
+        width: 100%;
+        position: relative;
+        color: $accent_color;
+    }
+
+    // .route_name::after {
+    //     content: '';
+    //     width: 10000px;
+    //     left: -4000px;
+    //     height: 1px;
+    //     background-color: #D9D9D9;
+    //     position: absolute;
+    //     bottom: 0;
+    // }
+
+    .place_container {
+        .choose_place {
+            margin-top: 15px;
+        }
+
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+}
+
+.choose_place {
+    text-align: center;
+    color: $textinvertcolor;
+    background-color: $accent_color;
+    border-radius: 5px;
+    width: 170px;
+    height: 40px;
+    font-size: 15px;
+    line-height: 36px;
+    box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.247);
+}
+
+.view_trips_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    margin-top: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+
+    .title {
+        font-size: 20px;
+        color: $textcolor;
+        text-align: center;
+    }
+
+    .date_info {
+        span {
+            color: $accent_color;
+            text-decoration: underline;
+        }
+        text-align: center;
+        color: $textcolor;
+        font-size: 20px;
+    }
+
+    .points_info {
+        text-align: center;
+        color: $textcolor;
+        font-size: 16px;
+
+        .span_from, .span_to {
+            color: $accent_color;
+            font-size: 18px;
+        }
+
+    }
+
+    .trip_card {
+        margin-top: 15px;
+        width: 270px;
+        background-color: white;
+        box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.356);
+
+        .time_place_container {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .time_container {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                width: 150px;
+                .title {
+                    text-align: left;
+                }
+                
+                .time {
+                    font-size: 27px;
+
+                    font-family: reosans;
+                    text-decoration: underline;
+                    // color: #1854CC;
+                    color: $accent_color;
+                    margin-top: 4px;
+                    // box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.1), -1px -1px 4px 0px rgba(0, 0, 0, 0.082);
+                }
+            }
+
+            // .choose_place {
+            //     text-align: center;
+            //     color: $textinvertcolor;
+            //     background-color: $accent_color;
+            //     border-radius: 5px;
+            //     width: 170px;
+            //     height: 40px;
+            //     font-size: 15px;
+            //     line-height: 36px;
+            //     box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.247);
+
+            //     // border: 2px solid $accent_color;
+            // }
+        }
+
+        .id_price_container {
+            display: flex;
+            justify-content: space-between;
+
+            .id, .price {
+                color: $accent_color;
+                font-family: reosans;
+                font-size: 20px;
+            }
+
+            .price span {
+                color: $textcolor;
+            }
+
+            .id_container {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .price_container {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+            }
+        }
+
+        .title {
+            color: $input_info_color;
+            font-size: 15px;
+            line-height: 15px;
+        }
+
+        &_inner_container {
+            padding: 20px 15px;
+        }
+    }
+}
+
+.trips_container {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    padding-top: 70px;
+    position: relative;
+    
+    .add_trip {
+        margin-top: 20px;
+        width: 180px;
+        height: 40px;
+        
+        background-color: $accent_color;
+        box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.356);
+        border-radius: 5px;
+        text-align: center;
+        line-height: 38px;
+        color: $textinvertcolor;
+    }
+
+    .list_trips {
+        width: 100%;
+        height: auto;
+        list-style-type: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-content: center;
+        &_item {
+            position: relative;
+            border-radius: 5px;
+            width: 240px;
+            box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.10), -2px -2px 4px 0px rgba(0, 0, 0, 0.10);
+            margin-top: 40px;
+            padding: 10px;
+            margin-bottom: 30px;
+        }
+
+        .departure_time {
+            position: absolute;
+            top: -25px;
+            left: -20px;
+            background-color: white;
+            padding: 5px 5px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.10), -1px -1px 2px 0px rgba(0, 0, 0, 0.10);
+            font-size: 15px;
+            color: $accent_color;
+        }
+
+        .dirver_edit_flexcontainer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .check_tickets {
+            &_container {
+                display: flex;
+                // justify-content: flex-end;
+                margin-top: 15px;
+                width: 100%;
+            }
+            display: block;
+            margin: 0 auto;
+            padding: 5px 10px;
+            background-color: white;
+            box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.10), -1px -1px 2px 0px rgba(0, 0, 0, 0.10);
+            border-radius: 5px;
+            color: $textinvertcolor;
+            background-color: $accent_color;
+        }
+
+        .driver {
+            &_container {
+                
+                display: flex;
+                flex-direction: column;
+                width: 100px;
+                align-items: flex-start;
+                align-content: flex-start;
+            }
+            &_title {
+                font-size: 15px;
+                color: $input_info_color;
+            }
+            color: $accent_color;
+            line-height: 20px;
+            font-size: 20px;
+        }
+
+        .id_bus_flexcontainer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .bus_container {
+            display: flex;
+            flex-direction: column;
+            width: 100px;
+            align-items: flex-end;
+            align-content: flex-end;
+            .bus_title {
+                font-size: 15px;
+                color: $input_info_color;
+            }
+            
+            .bus {
+                color: $accent_color;
+                line-height: 20px;
+                font-size: 20px;
+            }
+        }
+
+        .id_container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            .id_title {
+                font-size: 15px;
+                color: $input_info_color;
+            }
+            
+            .id {
+                margin: 0;
+                padding: 0;
+                font-size: 20px;
+                line-height: 20px;
+            }
+
+            .id_0 {
+                color: #29292996;
+            }
+
+            .id_1 {
+                color: $accent_color;
+            }
+
+            .id_2 {
+                color: $accent_color;
+            } 
+        }
+    }
+
+    .edit_remove_container {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        align-content: center;
+        margin-top: 10px;
+
+        img {
+            width: 40px;
+            height: 40px;
+            padding: 5px;
+        }
+
+
+        a {
+            text-align: center;
+            color: $textinvertcolor;
+            // font-size: 14px;
+            // width: 50px;
+            // height: 50px;
+            // width: 120px;
+            // height: 30px;
+            border-radius: 20px;
+            // padding: 5px;
+            box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.274);
+        }
+    }
+
+    .stops_container {
+        width: 100%;
+        padding: 5px 15px;
+        p {
+            color: #00000088;
+            font-size: 15px;
+            font-style: italic;
+        }
+        
+    }
+
+    .edit {
+        // filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(40deg) brightness(107%) contrast(102%);
+        margin-right: 10px;
+        background-color: $accent_color;
+
+    }
+
+    .remove {
+        // filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(40deg) brightness(107%) contrast(102%);
+        background-color: $errortext_color;
+    }
+
+}
+
+
+
+.edit_trip_form {
+    .flex_container {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        .form_item_container {
+            margin-top: 10px;
+            width: auto;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            fieldset {
+                border: none;
+            }
+            .input_info {
+                text-align: left;
+                width: 100%;
+                font-size: 15px;
+                color: $input_info_color;
+            }
+            input[type="date"] {
+                border: 1px solid #D4D4D4;
+                background: none;
+                color: $textcolor;
+                font-size: 17px;
+                border-radius: 8px;
+                // padding: 0 10px;
+                padding-left: 10px;
+                padding-right: 10px;
+                height: 50px;
+                width: 190px;
+                transition: border-left 0.04s ease-in-out;
+                &:focus {
+                    border-left: 2px solid $accent_color;
+                }
+            }
+            input[type="text"] {
+                border: 1px solid #D4D4D4;
+                color: $textcolor;
+                font-size: 17px;
+                border-radius: 8px;
+                width: 190px;
+                height: 50px;
+                padding-left: 10px;
+                padding-right: 10px;
+                transition: border-left border-right 0.04s ease-in-out;
+                &:focus {
+                    border-left: 2px solid $accent_color;
+                    border-right: 2px solid $accent_color;
+                }
+                
+            }
+            datalist {
+                position: absolute;
+                background-color: white;
+                // border: 1px solid $accent_color;
+                border-left: 2px solid $accent_color;
+                border-right: 2px solid $accent_color;
+                border-bottom: 2px solid $accent_color;
+                box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.10), -2px 0px 2px 0px rgba(0, 0, 0, 0.10);
+                border-radius: 0 0 10px 10px;
+                border-top: none;
+                width: 190px;
+                padding: 5px;
+                // top: -20px;
+                max-height: 150px;
+                overflow-y: auto;
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+
+            option {
+                background-color: white;
+                border-bottom: 1px solid #BEBEBE;
+                white-space:normal;
+                height: auto;
+                padding: 5px 4px;
+                color: $textcolor;
+                margin-bottom: 1px;
+                font-size: 15px;
+                transition: all ease-in-out 0.1s;
+                cursor: pointer;
+                &:last-child {
+                    border: none;
+                }
+                &:hover {
+                    background-color: $accent_color;
+                    color: $textinvertcolor;
+                    border-radius: 10px;
+                }
+            }
+
+            .active {
+                background-color: #D4D4D4;
+            }
+        }
+    }
+
+    button {
+        margin-top: 15px;
+        width: 150px;
+        height: 40px;
+        border: none;
+        background-color: $accent_color;
+        color: $textinvertcolor;
+        border-radius: 15px;
+        cursor: pointer;
+        box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.274);
+
+    }
+}

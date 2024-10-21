@@ -1,0 +1,11 @@
+dnspython
+Django
+requests
+django-filebrowser-no-grappelli
+Pillow
+django-bootstrap-datepicker-plus
+qrcode
+pyngrok
+django_better_admin_arrayfield
+django_grappelli
+django-select2

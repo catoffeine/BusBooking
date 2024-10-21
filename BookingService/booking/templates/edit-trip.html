@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% block inhead %}
+{{ form.media.css }}
+{% endblock %}
+{% block content %}
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script>
+    $("#myselect").select2({ width: '100%' });
+
+
+</script>
+
+<style>
+    .fullwidth {
+        width: 100% !important;
+    }
+
+    .s2input {
+        width: 100% !important;
+    }
+
+    fieldset.s2input > span {
+        width: 100% !important;
+    }
+
+</style>
+{% include 'header.html' %}
+<div class="container">
+    <h2>{{label}}</h2>
+    <form class="edit_trip_form" method="post">
+        {% csrf_token %}
+
+        <!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+        <div class="flex_container">
+            <div class="form_item_container datalist-control fullwidth">
+                <fieldset class="s2input">
+                    <p class="input_info">Маршрут</p>
+                    {{ form.route }}
+                </fieldset>
+                {{ form.route.errors }}
+            </div>
+
+            <div class="form_item_container datalist-control fullwidth">
+                <fieldset class="s2input">
+                    <p class="input_info">Автобус</p>
+                    {{ form.bus }}
+                </fieldset>
+                {{ form.bus.errors }}
+            </div>
+
+            {% if request.user.role == "driver" %}
+            <div hidden>
+                {% else %}
+                <div class="form_item_container datalist-control fullwidth">
+                    {% endif %}
+                    <fieldset class="s2input">
+                        <p class="input_info">Водитель</p>
+                        {{ form.driver }}
+                    </fieldset>
+                    {{ form.driver.errors }}
+                </div>
+
+                <div class="form_item_container">
+                    <p class="input_info">Дата отъезда</p>
+                    <input name="start_dt" id="example" type="text"/>
+
+                    <!-- {{ form.date }} -->
+                    {{ form.date.errors }}
+                </div>
+
+                <div class="form_item_container">
+                    <p class="input_info">Цена билета</p>
+                    {{ form.ticket_price }}
+                    {{ form.ticket_price.errors }}
+                </div>
+
+            </div>
+
+            <button type="submit">Сохранить</button>
+            <!--            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+            {{ form.media.js }}
+    </form>
+    <script>
+        $(document).ready(function() {
+            $("#route").select2({ width: 'resolve' });
+        });
+
+
+
+
+
+    </script>
+    <a class="back_btn" href="/my-trips">Назад</a>
+</div>
+
+{% load static %}
+<script src="{% static 'js/dropdown_search.js' %}"></script>
+
+<script>
+    $(function() {
+        $('input[name="start_dt"]').daterangepicker({
+        {% if start_dt %}
+            startDate: '{{start_dt}}',
+        {% endif %}
+            singleDatePicker: true,
+            showDropdowns: true,
+            timePicker: true,
+            timePicker24Hour: true,
+            locale: {
+                format: 'DD.MM.YY H:mm',
+                "separator": " - ",
+                "applyLabel": "Ок",
+                "cancelLabel": "Отмена",
+                "fromLabel": "От",
+                "toLabel": "До",
+                "customRangeLabel": "Custom",
+                "weekLabel": "W",
+                "daysOfWeek": [
+                    "Пн",
+                    "Вт",
+                    "Ср",
+                    "Чт",
+                    "Пт",
+                    "Сб",
+                    "Вс"
+                ],
+                "monthNames": [
+                    "Январь",
+                    "Февраль",
+                    "Март",
+                    "Апрель",
+                    "Май",
+                    "Июнь",
+                    "Июль",
+                    "Август",
+                    "Сентябрь",
+                    "Октябрь",
+                    "Ноябрь",
+                    "Декабрь"
+                ],
+                "firstDay": 1
+            },
+            applyButtonClasses: "datpicker_btn_apply",
+            cancelClass: "datpicker_btn_cancel"
+        });
+    });
+
+
+
+
+
+
+
+
+</script>
+
+{% endblock %}

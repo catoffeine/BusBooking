@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    {% include 'logo_title.html' %}
+    <img id="background_image">
+    <div class="container_auth">
+        
+        <h2 class="sign_up_title">Установите почту</h2>
+        <form class="set_password_registration" method="post">
+            {% csrf_token %}
+            <div class="flexcontainer">
+                <input type="email" name="email" placeholder="Почта" required="" id="email">
+                <button type="submit">УСТАНОВИТЬ ПОЧТУ</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+{% load static %}
+
+{% endblock %}
+
